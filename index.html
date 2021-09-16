@@ -21,6 +21,9 @@
     <h1>Hello</h1>
 </body>
 <script>
+    $(function () {
+        uj_kep_betoltese();
+    });
     function uj_kep_betoltese() {
         $.get("https://aws.random.cat/meow", 
             function (data, textStatus, jqXHR) {
