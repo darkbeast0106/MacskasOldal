@@ -33,13 +33,29 @@
       </table>
 </body>
 <script>
+    var szamlalo = 0;
+
     $(function () {
         uj_kep_betoltese();
     });
     function uj_kep_betoltese() {
         $.get("https://aws.random.cat/meow", 
             function (data, textStatus, jqXHR) {
-                console.log(data);
+                if (textStatus == "success") {
+                    szamlalo++;
+                    var html = $("#macskas_tabla").html();
+                    var datum = new Date();
+                    var formazott_datum = datum.toLocaleString();
+                    var ujsor = `
+                    <tr>
+                        <td>`+szamlalo+`</td>
+                        <td>`+formazott_datum+`</td>
+                        <td><img height="100px" src="`+data.file+`"></td>
+                    </tr>
+                    `;
+                    var uj_html = ujsor + html;
+                    $("#macskas_tabla").html(uj_html);
+                }
             },
             "json"
         );
